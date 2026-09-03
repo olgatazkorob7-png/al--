@@ -544,3 +544,6 @@ async def analyze(request: Request):
             "analysis": analysis_text,
         },
     )
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "AI-Cook backend with KodikRouter is running"}
