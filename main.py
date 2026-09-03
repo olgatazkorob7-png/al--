@@ -544,6 +544,33 @@ async def analyze(request: Request):
             "analysis": analysis_text,
         },
     )
-@app.get("/")
-def root():
-    return {"status": "ok", "message": "AI-Cook backend with KodikRouter is running"}
+@app.get("/", response_class=HTMLResponse)
+async def root():
+    return """
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI-Кулинар (Backend)</title>
+        <style>
+            body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #f9f9f9; }
+            h1 { color: #2c3e50; }
+            .endpoint { background: #ecf0f1; padding: 10px; border-radius: 5px; }
+            code { background: #d5d8dc; padding: 2px 6px; border-radius: 3px; }
+        </style>
+    </head>
+    <body>
+        <h1>🍳 AI-Кулинар: что приготовить из холодильника</h1>
+        <p>Бэкенд успешно запущен!</p>
+        <p>Доступные эндпоинты:</p>
+        <ul>
+            <li><code>POST /api/chat</code> — основной чат-ассистент</li>
+            <li><code>POST /api/tts</code> — озвучивание текста</li>
+        </ul>
+        <p>Для работы отправляйте запросы через <a href="https://www.postman.com/" target="_blank">Postman</a> или ваш фронтенд.</p>
+        <hr>
+        <p><small>Деплой на Railway. Версия 1.0</small></p>
+    </body>
+    </html>
+    """
